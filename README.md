@@ -1,36 +1,18 @@
 # SOLID Principle in Golang
+SOLID is an object-oriented design (OOD) principles by Robert C. Martin (Uncle Bob), have 5 principles :
 
-## What
-SOLID is an object-oriented design (OOD) principles by Robert C. Martin (Uncle Bob).
+1. Single Responsibility Principle
+2. Open / Closed Principle
+3. Liskov Substitution Principle
+4. Interface Segregation Principle
+5. Dependency Inversion Principle
 
-## Why 
-Code easy to maintain and extended as project grows, with avoiding bad code.
-
-## How 
-How bad code is ? 
+## Why
+To make project easier to maintain and extend as project grows, with avoiding bad code that have indicators :
 - Ridgility (Difficult to change, even small pieces)
 - Fragility (Easily crashed when code being changed)
 - Immobility (Not reusable)
 - Complex (Over engineered)
-
-# Detail
-1. Single Responsibility Principle
-"A class should only have a single responsibility..."
-
-2. Open / Closed Principle
-"Software entities should be open for extension, but closed for 
-modification."
-
-3. Liskov Substitution Principle
-"Objects in a program should be replaceable with instances of their 
-subtypes without altering the correctness of that program."
-
-4. Interface Segregation Principle
-"Many client-specific interfaces are better than one 
-general-purpose interface."
-
-5. Dependency Inversion Principle
-"Depend on abstractions, not concretions"
 
 ## Presentation
 - https://www.canva.com/design/DAEj5nJFQEM/iKQXLXO2btPdeyVzkw2Y3w/view?utm_content=DAEj5nJFQEM&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton
