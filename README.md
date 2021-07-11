@@ -20,7 +20,7 @@ To make project easier to maintain and extend as project grows, with avoiding ba
 ## Stay in touch
 - Author - [Muhammad Cholis Malik](https://www.linkedin.com/in/mcholismalik/)
 
-## Refrence
+## Reference
 - https://dave.cheney.net/2016/08/20/solid-go-design
 - https://medium.com/@felipedutratine/solid-single-responsibility-principle-in-golang-dc4a6be9bb3a
 - https://dev.to/jrwren/solid-principles-in-the-go-programming-language-kbc
