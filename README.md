@@ -8,7 +8,7 @@ SOLID is an object-oriented design (OOD) principles by Robert C. Martin (Uncle B
 5. Dependency Inversion Principle
 
 ## Why
-To make project easier to maintain and extend as project grows, with avoiding bad code that have indicators :
+To make project easier to maintain and extend as project grows, with avoiding bad code that have some indicators :
 - Ridgility (Difficult to change, even small pieces)
 - Fragility (Easily crashed when code being changed)
 - Immobility (Not reusable)
