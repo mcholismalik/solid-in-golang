@@ -2,25 +2,24 @@ package after
 
 import "fmt"
 
-type ISender interface {
-	SendEmail(msg *Message)
-	SendWhatsapp(msg *Message)
+type Sender struct {
+	Sender   *User
+	Receiver *User
+	Message  string
 }
 
-type Sender struct{}
-
-func (s *Sender) SendEmail(msg *Message) bool {
-	fmt.Println("Send email")
-	fmt.Println("Sender email : ", msg.senderEmail)
-	fmt.Println("Receiver email : ", msg.receiverEmail)
-	fmt.Println("Body : ", msg.body)
+func (s *Sender) SendWhatsapp() bool {
+	fmt.Println("Send whatsapp")
+	fmt.Println("Sender:", s.Sender.phone)
+	fmt.Println("Receiver:", s.Receiver.phone)
+	fmt.Println("Body:", s.Message)
 	return true
 }
 
-func (s *Sender) SendWhatsapp(msg *Message) bool {
-	fmt.Println("Send whatsapp")
-	fmt.Println("Sender number : ", msg.senderNumber)
-	fmt.Println("Receiver number : ", msg.receiverNumber)
-	fmt.Println("Body : ", msg.body)
+func (s *Sender) SendTelegram() bool {
+	fmt.Println("Send telegram")
+	fmt.Println("Sender:", s.Sender.phone)
+	fmt.Println("Receiver:", s.Receiver.phone)
+	fmt.Println("Body:", s.Message)
 	return true
 }

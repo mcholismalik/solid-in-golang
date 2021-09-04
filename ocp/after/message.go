@@ -3,49 +3,31 @@ package after
 import "fmt"
 
 type IMessage interface {
-	Create()
+	Create() *Message
 }
 
 type Message struct {
-	body string
+	Body                       string
+	MessageTemplateCompetition *MessageTemplateCompetition
+	MessageTemplateWebinar     *MessageTemplateWebinar
 }
 
-type MessageWhatsapp struct {
-	Message
-	receiver int32
-	sender   int32
-}
-
-type MessageEmail struct {
-	Message
-	receiver string
-	sender   string
-}
-
-func (m *MessageWhatsapp) Create() *MessageWhatsapp {
-	m = &MessageWhatsapp{
-		Message: Message{
-			body: "Hai rahma !",
-		},
-		sender:   111,
-		receiver: 222,
+func (m *Message) Create() string {
+	var template string
+	if m.MessageTemplateCompetition != nil {
+		template = m.MessageTemplateCompetition.Create()
+	}
+	if m.MessageTemplateWebinar != nil {
+		template = m.MessageTemplateWebinar.Create()
 	}
 
-	fmt.Println("Create Message Whatsapp")
-	fmt.Printf("%+v\n", m)
-	return m
-}
-
-func (m *MessageEmail) Create() *MessageEmail {
-	m = &MessageEmail{
-		Message: Message{
-			body: "Hai rahma !",
-		},
-		sender:   "cholis@gmail.com",
-		receiver: "rahma@gmail.com",
+	m = &Message{
+		Body: "Hai malik !" + template,
 	}
 
-	fmt.Println("Create Message Email")
+	res := m.Body
+
+	fmt.Println("Create Message")
 	fmt.Printf("%+v\n", m)
-	return m
+	return res
 }

@@ -9,10 +9,14 @@ SOLID is an object-oriented design (OOD) principles by Robert C. Martin (Uncle B
 
 ## Why
 To make project easier to maintain and extend as project grows, with avoiding bad code that have some indicators :
-- Ridgility (Difficult to change, even small pieces)
-- Fragility (Easily crashed when code being changed)
-- Immobility (Not reusable)
-- Complex (Over engineered)
+1. Rigidity (Difficult to change, even small pieces)
+  - Dont aware of improvement of some feature
+2. Fragility (Easily crashed when code being changed)
+  - Dont aware of unexpected condition
+3. Immobility (Hard to refactor, not reusable)
+  - Write a whole busines rules in one function
+4. Viscosity (Like swim in syrup)
+  - Bad written, pattern, or documentation.
 
 ## Presentation
 - https://www.canva.com/design/DAEj5nJFQEM/iKQXLXO2btPdeyVzkw2Y3w/view?utm_content=DAEj5nJFQEM&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton
@@ -29,3 +33,4 @@ To make project easier to maintain and extend as project grows, with avoiding ba
 - https://github.com/ammorteza/SOLID-principles-in-Golang
 - https://codingsight.com/indicators-of-problem-design/
 - https://www.digitalocean.com/community/conceptual_articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design
+- https://softwareengineering.stackexchange.com/questions/357127/clear-examples-for-code-smells

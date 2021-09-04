@@ -9,23 +9,22 @@ import (
 func Run() {
 	fmt.Println("Run lsp (liskov subtitution principle)")
 
-	var webinar after.IMessageType = &after.MessageTypeWebinar{}
-	var competition after.IMessageType = &after.MessageTypeCompetition{}
+	messageTemplateWebinar := &after.MessageTemplateWebinar{}
+	message := &after.Message{
+		MessageTemplate: messageTemplateWebinar,
+	}
 
-	whatsapp := &after.MessageWhatsapp{}
-	email := &after.MessageEmail{}
-
-	whatsappWebinarPayload := whatsapp.Create(webinar)
-	emailWebinarPayload := email.Create(webinar)
-	fmt.Println()
-	whatsappCompetitionPayload := whatsapp.Create(competition)
-	emailCompetitionPayload := email.Create(competition)
+	messagePayload := message.Create()
 	fmt.Println()
 
-	sender := &after.Sender{}
-	sender.SendWhatsapp(whatsappWebinarPayload)
-	sender.SendWhatsapp(whatsappCompetitionPayload)
+	user := &after.User{}
+	sender := &after.Sender{
+		Sender:   user.GetSender(),
+		Receiver: user.GetReceiver(),
+		Message:  messagePayload,
+	}
+
+	sender.SendWhatsapp()
 	fmt.Println()
-	sender.SendEmail(emailWebinarPayload)
-	sender.SendEmail(emailCompetitionPayload)
+	sender.SendTelegram()
 }

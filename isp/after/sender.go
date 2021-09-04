@@ -2,25 +2,48 @@ package after
 
 import "fmt"
 
-type ISender interface {
-	SendEmail(msg *MessageEmail)
-	SendWhatsapp(msg *MessageWhatsapp)
+type ISenderSocmed interface {
+	SendWhatsapp()
+	SendTelegram()
 }
 
-type Sender struct{}
+type SenderSocmed struct {
+	Sender   *User
+	Receiver *User
+	Message  string
+}
 
-func (s *Sender) SendEmail(msg *MessageEmail) bool {
-	fmt.Println("Send email")
-	fmt.Println("Sender : ", msg.sender)
-	fmt.Println("Receiver : ", msg.receiver)
-	fmt.Println("Body : ", msg.body)
+type ISenderEmail interface {
+	SendEmail()
+}
+
+type SenderEmail struct {
+	Sender   *User
+	Receiver *User
+	Subject  string
+	Body     string
+}
+
+func (s *SenderSocmed) SendWhatsapp() bool {
+	fmt.Println("Send whatsapp")
+	fmt.Println("SenderEmail:", s.Sender.phone)
+	fmt.Println("Receiver:", s.Receiver.phone)
+	fmt.Println("Body:", s.Message)
 	return true
 }
 
-func (s *Sender) SendWhatsapp(msg *MessageWhatsapp) bool {
-	fmt.Println("Send whatsapp")
-	fmt.Println("Sender : ", msg.sender)
-	fmt.Println("Receiver : ", msg.receiver)
-	fmt.Println("Body : ", msg.body)
+func (s *SenderSocmed) SendTelegram() bool {
+	fmt.Println("Send telegram")
+	fmt.Println("Sender:", s.Sender.phone)
+	fmt.Println("Receiver:", s.Receiver.phone)
+	fmt.Println("Body:", s.Message)
+	return true
+}
+
+func (s *SenderEmail) SendEmail() bool {
+	fmt.Println("Send email")
+	fmt.Println("Sender:", s.Sender.email)
+	fmt.Println("Receiver:", s.Receiver.email)
+	fmt.Println("Subject:", s.Subject)
 	return true
 }

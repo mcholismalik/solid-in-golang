@@ -9,14 +9,22 @@ import (
 func Run() {
 	fmt.Println("Run ocp (open closed principle)")
 
-	whatsapp := &after.MessageWhatsapp{}
-	email := &after.MessageEmail{}
-	whatsappPayload := whatsapp.Create()
-	emailPayload := email.Create()
+	messageTemplateCompetition := &after.MessageTemplateCompetition{}
+	message := &after.Message{
+		MessageTemplateCompetition: messageTemplateCompetition,
+	}
+
+	messagePayload := message.Create()
 	fmt.Println()
 
-	sender := &after.Sender{}
-	sender.SendWhatsapp(whatsappPayload)
+	user := &after.User{}
+	sender := &after.Sender{
+		Sender:   user.GetSender(),
+		Receiver: user.GetReceiver(),
+		Message:  messagePayload,
+	}
+
+	sender.SendWhatsapp()
 	fmt.Println()
-	sender.SendEmail(emailPayload)
+	sender.SendTelegram()
 }

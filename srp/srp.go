@@ -13,8 +13,14 @@ func Run() {
 	messagePayload := message.Create()
 	fmt.Println()
 
-	sender := &after.Sender{}
-	sender.SendWhatsapp(messagePayload)
+	user := &after.User{}
+	sender := &after.Sender{
+		Sender:   user.GetSender(),
+		Receiver: user.GetReceiver(),
+		Message:  messagePayload,
+	}
+
+	sender.SendWhatsapp()
 	fmt.Println()
-	sender.SendEmail(messagePayload)
+	sender.SendTelegram()
 }

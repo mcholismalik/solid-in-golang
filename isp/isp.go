@@ -9,23 +9,34 @@ import (
 func Run() {
 	fmt.Println("Run isp (interface segregation principle)")
 
-	var webinar after.IMessageType = &after.MessageTypeWebinar{}
-	var competition after.IMessageType = &after.MessageTypeCompetition{}
+	messageTemplateWebinar := &after.MessageTemplateWebinar{}
+	messageSocmed := &after.MessageSocmed{
+		MessageTemplate: messageTemplateWebinar,
+	}
+	messageEmail := &after.MessageEmail{
+		MessageTemplate: messageTemplateWebinar,
+	}
 
-	var whatsapp after.IMessageWhatsapp = &after.MessageWhatsapp{}
-	var email after.IMessageEmail = &after.MessageEmail{}
-
-	whatsappWebinarPayload := whatsapp.Create(webinar)
-	emailWebinarPayload := email.Create(webinar)
-	fmt.Println()
-	whatsappCompetitionPayload := whatsapp.Create(competition)
-	emailCompetitionPayload := email.Create(competition)
+	messageSocmedPayload := messageSocmed.Create()
+	messageEmailPayload := messageEmail.Create()
 	fmt.Println()
 
-	sender := &after.Sender{}
-	sender.SendWhatsapp(whatsappWebinarPayload)
-	sender.SendWhatsapp(whatsappCompetitionPayload)
+	user := &after.User{}
+	senderSocmed := &after.SenderSocmed{
+		Sender:   user.GetSender(),
+		Receiver: user.GetReceiver(),
+		Message:  messageSocmedPayload.Body,
+	}
+	senderEmail := &after.SenderEmail{
+		Sender:   user.GetSender(),
+		Receiver: user.GetReceiver(),
+		Subject:  messageEmailPayload.Subject,
+		Body:     messageEmailPayload.Body,
+	}
+
+	senderSocmed.SendWhatsapp()
 	fmt.Println()
-	sender.SendEmail(emailWebinarPayload)
-	sender.SendEmail(emailCompetitionPayload)
+	senderSocmed.SendTelegram()
+	fmt.Println()
+	senderEmail.SendEmail()
 }

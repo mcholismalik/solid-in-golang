@@ -7,39 +7,47 @@ import (
 )
 
 type Factory struct {
-	MessageTypeWebinar     after.IMessageType
-	MessageTypeCompetition after.IMessageType
-	MessageWhatsapp        after.IMessageWhatsapp
-	MessageEmail           after.IMessageEmail
+	MessageSocmed after.IMessageSocmed
+	MessageEmail  after.IMessageEmail
+	User          after.IUser
 }
 
 func Run() {
 	fmt.Println("Run dip (dependency inversion principle)")
 
-	var webinar after.IMessageType = &after.MessageTypeWebinar{}
-	var competition after.IMessageType = &after.MessageTypeCompetitionCustom{}
+	messageTemplateWebinar := &after.MessageTemplateWebinar{}
+	MessageSocmed := &after.MessageSocmed{
+		MessageTemplate: messageTemplateWebinar,
+	}
+	MessageEmail := &after.MessageEmail{
+		MessageTemplate: messageTemplateWebinar,
+	}
+	User := &after.User{}
 
-	var whatsapp after.IMessageWhatsapp = &after.MessageWhatsapp{}
-	var email after.IMessageEmail = &after.MessageEmail{}
-
-	factory := Factory{webinar, competition, whatsapp, email}
+	factory := Factory{MessageSocmed, MessageEmail, User}
 	Execute(&factory)
-
 }
 
 func Execute(f *Factory) {
-	whatsappWebinarPayload := f.MessageWhatsapp.Create(f.MessageTypeWebinar)
-	emailWebinarPayload := f.MessageEmail.Create(f.MessageTypeWebinar)
-
-	fmt.Println()
-	whatsappCompetitionPayload := f.MessageWhatsapp.Create(f.MessageTypeCompetition)
-	emailCompetitionPayload := f.MessageEmail.Create(f.MessageTypeCompetition)
+	messageSocmedPayload := f.MessageSocmed.Create()
+	messageEmailPayload := f.MessageEmail.Create()
 	fmt.Println()
 
-	sender := &after.Sender{}
-	sender.SendWhatsapp(whatsappWebinarPayload)
-	sender.SendWhatsapp(whatsappCompetitionPayload)
+	senderSocmed := &after.SenderSocmed{
+		Sender:   f.User.GetSender(),
+		Receiver: f.User.GetReceiver(),
+		Message:  messageSocmedPayload.Body,
+	}
+	senderEmail := &after.SenderEmail{
+		Sender:   f.User.GetSender(),
+		Receiver: f.User.GetReceiver(),
+		Subject:  messageEmailPayload.Subject,
+		Body:     messageEmailPayload.Body,
+	}
+
+	senderSocmed.SendWhatsapp()
 	fmt.Println()
-	sender.SendEmail(emailWebinarPayload)
-	sender.SendEmail(emailCompetitionPayload)
+	senderSocmed.SendTelegram()
+	fmt.Println()
+	senderEmail.SendEmail()
 }

@@ -2,56 +2,45 @@ package after
 
 import "fmt"
 
-type IMessageWhatsapp interface {
-	Create(IMessageType) *MessageWhatsapp
+type IMessageSocmed interface {
+	Create() *MessageSocmed
+}
+
+type MessageSocmed struct {
+	Body            string
+	MessageTemplate IMessageTemplate
 }
 
 type IMessageEmail interface {
-	Create(IMessageType) *MessageEmail
-}
-
-type Message struct {
-	body string
-}
-
-type MessageWhatsapp struct {
-	Message
-	receiver int32
-	sender   int32
+	Create() *MessageEmail
 }
 
 type MessageEmail struct {
-	Message
-	receiver string
-	sender   string
+	Subject         string
+	Body            string
+	MessageTemplate IMessageTemplate
 }
 
-func (m *MessageWhatsapp) Create(mT IMessageType) *MessageWhatsapp {
-	additional := mT.Create()
-	m = &MessageWhatsapp{
-		Message: Message{
-			body: "Hai rahma ! " + additional,
-		},
-		sender:   111,
-		receiver: 222,
+func (m *MessageSocmed) Create() *MessageSocmed {
+	template := m.MessageTemplate.Create()
+	m = &MessageSocmed{
+		Body: "Hai malik !" + template,
 	}
 
-	fmt.Println("Create Message Whatsapp")
+	fmt.Println("Create Message")
 	fmt.Printf("%+v\n", m)
 	return m
 }
 
-func (m *MessageEmail) Create(mT IMessageType) *MessageEmail {
-	additional := mT.Create()
+func (m *MessageEmail) Create() *MessageEmail {
+	template := m.MessageTemplate.CreateHtml()
+
 	m = &MessageEmail{
-		Message: Message{
-			body: "Hai rahma !" + additional,
-		},
-		sender:   "cholis@gmail.com",
-		receiver: "rahma@gmail.com",
+		Subject: "Info",
+		Body:    "Hai malik !" + template,
 	}
 
-	fmt.Println("Create Message Email")
+	fmt.Println("Create Message")
 	fmt.Printf("%+v\n", m)
 	return m
 }

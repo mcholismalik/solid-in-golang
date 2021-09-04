@@ -7,23 +7,17 @@ type IMessage interface {
 }
 
 type Message struct {
-	senderNumber   int32
-	receiverNumber int32
-	senderEmail    string
-	receiverEmail  string
-	body           string
+	Body string
 }
 
-func (m *Message) Create() *Message {
+func (m *Message) Create() string {
 	m = &Message{
-		senderNumber:   111,
-		receiverNumber: 222,
-		senderEmail:    "cholis@gmail.com",
-		receiverEmail:  "rahma@gmail.com",
-		body:           "Hai rahma !",
+		Body: "Hai malik !",
 	}
+
+	res := m.Body
 
 	fmt.Println("Create Message")
 	fmt.Printf("%+v\n", m)
-	return m
+	return res
 }

@@ -4,21 +4,20 @@ import "fmt"
 
 type IMessage interface {
 	Create()
-	Read()
 	Send()
 }
 
 type Message struct {
-	sender   int32
-	receiver int32
 	body     string
+	sender   int
+	receiver int
 }
 
 func (m *Message) Create() *Message {
 	msg := Message{
-		sender:   111,
-		receiver: 222,
-		body:     "Hai rahma !",
+		body:     "Hi, malik !",
+		sender:   6287,
+		receiver: 6281,
 	}
 
 	fmt.Println("Create Message")
@@ -26,18 +25,9 @@ func (m *Message) Create() *Message {
 	return &msg
 }
 
-func (m *Message) Read(msg *Message) *Message {
-	fmt.Println("Read Message")
-	fmt.Println("Sender : ", m.sender)
-	fmt.Println("Receiver : ", m.receiver)
-	fmt.Println("Body : ", m.body)
-	return msg
-}
-
 func (m *Message) Send(msg *Message) *Message {
 	fmt.Println("Send Message")
-	fmt.Println("Send from : ", m.sender)
-	fmt.Println("Receiver to : ", m.receiver)
-	fmt.Println("Body is : ", m.body)
+	fmt.Println("Sender:", m.sender)
+	fmt.Println("Receiver:", m.receiver)
 	return msg
 }
