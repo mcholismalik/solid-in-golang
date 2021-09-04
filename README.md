@@ -34,3 +34,4 @@ To make project easier to maintain and extend as project grows, with avoiding ba
 - https://codingsight.com/indicators-of-problem-design/
 - https://www.digitalocean.com/community/conceptual_articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design
 - https://softwareengineering.stackexchange.com/questions/357127/clear-examples-for-code-smells
+- https://fi.ort.edu.uy/innovaportal/file/2032/1/design_principles.pdf
